@@ -1,0 +1,39 @@
+name: Telegram Arduino Handler
+
+on:
+  repository_dispatch:
+    types: [arduino_command]
+
+jobs:
+  send_command:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Send command to Telegram
+      run: |
+        COMMAND="${{ github.event.client_payload.command }}"
+        CHAT_ID="${{ secrets.TELEGRAM_CHAT_ID }}"
+        BOT_TOKEN="${{ secrets.TELEGRAM_BOT_TOKEN }}"
+        
+        # Enviar comando al grupo
+        curl -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+          -H "Content-Type: application/json" \
+          -d "{\"chat_id\":\"${CHAT_ID}\",\"text\":\"${COMMAND}\"}"
+        
+        echo "Comando enviado: ${COMMAND}"
+    
+    - name: Wait for Arduino response
+      run: |
+        echo "Esperando respuesta del Arduino..."
+        # Aquí implementarías la lógica para obtener la respuesta
+        # Por ahora, simulamos una espera
+        sleep 5
+        
+    - name: Get Arduino response
+      run: |
+        BOT_TOKEN="${{ secrets.TELEGRAM_BOT_TOKEN }}"
+        
+        # Obtener últimos mensajes
+        RESPONSE=$(curl -s "https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?limit=1&offset=-1")
+        echo "Respuesta obtenida del Arduino"
+        echo $RESPONSE
