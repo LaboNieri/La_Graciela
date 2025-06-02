@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Arduino</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Control Arduino</h1>
+        
+        <div class="status" id="status">
+            <span class="status-indicator"></span>
+            <span>Listo para enviar comandos</span>
+        </div>
+
+        <div class="commands">
+            <button class="cmd-btn" onclick="sendCommand('Menu')">📋 Menu</button>
+            <button class="cmd-btn" onclick="sendCommand('Estado')">📊 Estado</button>
+            <button class="cmd-btn" onclick="sendCommand('Reset')">🔄 Reset</button>
+            
+            <!-- Agrega más botones según tus comandos -->
+            <div class="custom-command">
+                <input type="text" id="customCmd" placeholder="Comando personalizado">
+                <button onclick="sendCustomCommand()">Enviar</button>
+            </div>
+        </div>
+
+        <div class="response" id="response">
+            <h3>Respuesta del Arduino:</h3>
+            <pre id="responseText">Esperando comando...</pre>
+        </div>
+
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Procesando comando...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
