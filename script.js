@@ -19,7 +19,7 @@ async function sendCommand(command) {
             method: 'POST',
             headers: {
                 'Accept': 'application/vnd.github.v3+json',
-                'Authorization': 'token TU_GITHUB_TOKEN', // Necesitarás configurar esto
+                'Authorization': '7219586728:AAGhqs_bRkS50Ag2GHgxOZSfyPVjsk8OpbA', // Necesitarás configurar esto
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
